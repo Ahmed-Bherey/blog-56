@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/admin" , [DashboardController::class , 'index']);
+Route::get("/admin" , [DashboardController::class , 'index'])->middleware('auth');
+Route::get("/show-user" , [DashboardController::class , 'showUser']);
 
-Route::prefix("admin")->group(function(){
+Route::middleware('auth')->prefix("admin")->group(function(){
     Route::resource("/user" , UserController::class);
 });
